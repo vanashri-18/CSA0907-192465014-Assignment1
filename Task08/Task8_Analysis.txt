@@ -1,0 +1,23 @@
+TASK 8 – APPLY POLYMORPHISM
+
+1. Compile-Time Polymorphism:
+The Vehicle class has two overloaded calculateFee() methods: calculateFee(int minutes) and calculateFee(LocalTime in, LocalTime out). The compiler selects the method based on the arguments supplied.
+
+2. Runtime Polymorphism:
+The Vehicle array stores TwoWheeler, Car and ElectricCar objects using upcasting. When v.calculateFee(130) is called, the inherited method calls ratePerHour(), and Java dynamically selects the subclass implementation.
+
+3. Dynamic Dispatch Trace:
+Declared reference type: Vehicle.
+Actual object type: ElectricCar.
+Called method: calculateFee(130), inherited from Vehicle.
+Rate method executed: Car.ratePerHour(), returning Rs 30 per hour.
+Calculation: (130 + 59) / 60 = 3 billable hours; 3 × 30 = Rs 90. Charging adds 10 × 12 = Rs 120, giving Rs 210.
+
+4. Design Benefit:
+Polymorphism avoids writing a long if-else chain to calculate each vehicle's fee. Each subclass provides its own rate implementation, making the design easier to extend and maintain.
+
+5. equals() Behaviour:
+The last line prints true because equals() compares only registration numbers. Both objects have registration number TN02B2, even though one is a Car and the other is an ElectricCar. This may be acceptable if registration number alone defines identity. A parking system may instead require matching vehicle categories too, depending on its business rules.
+
+6. instanceof Alternative:
+Using instanceof checks and casts would require checking vehicle types and updating central fee-calculation code whenever a new type is added. With k vehicle types, a chain of checks can take O(k) time in the worst case. Dynamic dispatch is generally O(1) for method selection, and the fee calculation here is also O(1). Polymorphism reduces repeated type checks and central code changes.
