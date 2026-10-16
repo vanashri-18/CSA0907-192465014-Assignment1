@@ -1,0 +1,15 @@
+**Task 9 – Introduce Abstraction**
+
+1. **Abstract class:** `Vehicle` is abstract because all vehicles share registration details and parking-fee behaviour. The `calculateFee(int minutes)` method is abstract because each vehicle type may calculate its fee differently.
+
+2. **Interface:** `Chargeable` represents the charging capability. Only vehicles that support charging need to implement it.
+
+3. **Reason for the design:** An abstract class shares state, constructors, and common implementation. An interface defines a capability without forcing every vehicle to support it.
+
+4. **Multiple behaviours:** `ElectricCar` extends `Car` and implements `Chargeable`. Java allows a class to implement multiple interfaces, even though it can extend only one class.
+
+5. **Default and static methods:** The default method `showChargingMessage()` provides reusable behaviour. The static method `getChargingPolicy()` provides interface-level information without requiring an object.
+
+6. **Alternative design:** If `Vehicle` becomes an interface, it cannot have ordinary instance fields or constructors. Default methods can provide implementation, but object state must be maintained in implementing classes. If `Chargeable` becomes an abstract class, a class already extending another class cannot extend it as well. Multiple behaviours become harder to combine.
+
+7. **Complexity analysis:** Both abstract-class and interface method calls generally have constant-time overhead, O(1), for a fixed method body. Exact performance depends on JVM optimisation. Object space is O(1) for a fixed number of fields; the actual space depends on the fields and object layout, not simply on whether a class or interface is used.
