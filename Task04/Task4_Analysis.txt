@@ -1,0 +1,24 @@
+@"
+TASK 4 - CLASSES, OBJECTS AND CONSTRUCTORS
+
+1. Classes, Fields and Methods:
+Vehicle stores vehicle number and vehicle type. ParkingSlot stores floor, slot number and occupancy status. ParkingTicket stores ticket number, vehicle, slot and entry time. Methods display ticket details and manage slot occupancy.
+
+2. Constructors:
+Default constructors provide initial default values. Parameterised constructors initialise objects with supplied values. Overloaded constructors allow objects to be created in different ways. The copy constructor creates a new ticket using details from an existing ticket.
+
+3. this Keyword and Constructor Chaining:
+The this keyword distinguishes instance fields from parameters. Constructor chaining using this() reuses initialisation code and avoids duplication.
+
+4. Copy Constructor:
+A copy constructor is useful when a new ticket must be created from existing ticket details. The new ticket receives a unique ticket number instead of reusing the original number. Vehicle and slot references are shared in this example.
+
+5. Memory:
+Reference variables are typically local variables stored in stack frames. Objects and their instance fields are allocated on the Java heap. References connect variables to objects. Objects can be garbage-collected when they are no longer reachable.
+
+6. Alternative Approaches:
+Default constructor followed by setters can create an incomplete object before all fields are assigned. Static factory methods can validate input and control object creation. Parameterised constructors provide direct initialisation and can reject invalid input immediately.
+
+7. Complexity:
+Creating n ParkingTicket objects takes O(n) total time and O(n) space if all n objects remain reachable. Constructor chaining does not change the asymptotic complexity. Setter-based creation is also O(n) when a constant number of setters is used per ticket. Static factory creation is O(n) when each factory call performs constant-time work.
+"@ | Set-Content Task04/Task4_Analysis.txt
