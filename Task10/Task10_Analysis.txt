@@ -1,0 +1,25 @@
+TASK 10 – ENCAPSULATION THROUGH PACKAGES AND ACCESS MODIFIERS
+
+**1. Package Structure**
+
+The application uses three packages: `parking.model`, `parking.service`, and `parking.app`. The model stores parking information, the service calculates parking fees, and the app runs the program.
+
+**2. Access Modifiers**
+
+The fields `slotNumber` and `durationMinutes` are private to protect data. The constructor, getters, setters, and service methods are public so they can be accessed from other packages. Protected and package-private access are not needed in this design.
+
+**3. Validation**
+
+The `setSlotNumber()` method rejects zero and negative slot numbers. The `setDurationMinutes()` method rejects negative and null durations. These checks prevent invalid data from being stored.
+
+**4. Wrapper Classes and Autoboxing**
+
+`Integer` is a wrapper class for the primitive type `int`. Assigning the value `5` to an `Integer` demonstrates autoboxing. Using `==` with wrapper objects may compare references instead of values, whereas `.equals()` compares their values.
+
+**5. Alternative Design and Complexity**
+
+If fields were public, other code could change them without validation. Repeating validation at multiple locations increases code duplication and maintenance effort. Each update uses a fixed number of checks, so validation takes O(1) time. If the same rules must be maintained across N different locations, up to O(N) locations may need updating when the rules change.
+
+**Conclusion**
+
+Packages organise the application, while private fields and validated setters protect object data and improve maintainability.
