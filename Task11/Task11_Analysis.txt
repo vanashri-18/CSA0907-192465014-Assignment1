@@ -1,0 +1,83 @@
+# TASK 11 – SMART PARKING SYSTEM
+## Implementation, Testing and Design Evaluation
+
+### 1. Objective
+
+The objective is to implement and test a Smart Parking System using Java. The system supports different vehicle types, parking slot management, ticket generation, parking fee calculation, and vehicle exit processing. It also evaluates object-oriented design principles and compares alternative data structures.
+
+### 2. Implementation Summary
+
+The program is implemented in `SmartParkingSystem.java`. It contains the abstract `Vehicle` class, the `Bike`, `Car`, and `Truck` subclasses, the `ParkingTicket` class, and the `ParkingFacility` class.
+
+An array of `ParkingTicket` objects stores active parking tickets. The program validates vehicle types, registration numbers, slot numbers, and parking durations. The parking fee is calculated using the number of started 60-minute periods.
+
+**Fee rule:** Zero minutes costs Rs. 0. Every started 60-minute period costs the vehicle's hourly rate.
+
+- Bike: Rs. 10 per started hour
+- Car: Rs. 30 per started hour
+- Truck: Rs. 50 per started hour
+
+### 3. Test Results
+
+| Test case | Expected result | Actual result | Status |
+|---|---|---|---|
+| Bike entry | Park successfully | Parked successfully | Pass |
+| Car entry | Park successfully | Parked successfully | Pass |
+| Last free slot | No free slots remain | 0 free slots | Pass |
+| Parking when full | Reject vehicle | Slot is occupied | Pass |
+| Duplicate registration | Reject duplicate | Duplicate registration number | Pass |
+| Unknown vehicle type | Reject vehicle | Unknown vehicle type | Pass |
+| Invalid slot number | Reject request | Invalid slot number | Pass |
+| Zero-minute stay | Fee is Rs. 0 | Fee: Rs. 0 | Pass |
+| Car stays exactly 60 minutes | Fee is Rs. 30 | Fee: Rs. 30 | Pass |
+| Invalid negative duration | Reject duration | Invalid parking duration | Pass |
+| Reuse a freed slot | Allow new vehicle | Parked successfully | Pass |
+| Truck stays 61 minutes | Fee is Rs. 100 | Fee: Rs. 100 | Pass |
+
+### 4. Manual Collection Calculation
+
+The collection can be verified manually using the test scenario:
+
+1. Bike parks for 0 minutes: Rs. 0.
+2. Car parks for 60 minutes: 1 started hour × Rs. 30 = Rs. 30.
+3. Truck parks for 61 minutes: 2 started hours × Rs. 50 = Rs. 100.
+
+**Total collection = Rs. 0 + Rs. 30 + Rs. 100 = Rs. 130.**
+
+The program displays a final collection of **Rs. 130**, which matches the manual calculation.
+
+### 5. Object-Oriented Design Evaluation
+
+**Encapsulation:** Fields such as registration number, ticket details, and parking slots are private. Access is provided through methods.
+
+**Inheritance:** `Bike`, `Car`, and `Truck` inherit from the abstract `Vehicle` class, reducing repeated code.
+
+**Polymorphism:** Each vehicle type provides its own hourly rate. The fee calculation calls `getHourlyRate()` through a `Vehicle` reference.
+
+**Abstraction:** The abstract `Vehicle` class defines common vehicle behaviour without requiring the parking facility to know every implementation detail.
+
+**Limitation:** The current system stores active tickets in an array and searches through it during exit processing. As the number of slots increases, searching for a vehicle takes more time. The system also does not persist parking information after the program closes.
+
+### 6. Alternative Data Structure and Complexity Analysis
+
+Let n represent the number of currently parked vehicles.
+
+| Data structure | Finding ticket on exit | Space for n tickets | Explanation |
+|---|---|---|---|
+| Array | O(n) | O(n) | Tickets are searched one by one. |
+| ArrayList | O(n) | O(n) | A linear search is required unless an additional index is maintained. |
+| HashMap keyed by registration number | O(1) average, O(n) worst case | O(n) | The registration number directly identifies the ticket on average. |
+
+A HashMap is a suitable choice when exit processing frequently searches for vehicles by registration number. An ArrayList provides flexible resizing but still requires a linear search. The array is simple and efficient for a small parking facility with a fixed capacity.
+
+These complexities describe ticket lookup. In the current array implementation, finding a free slot or checking for a duplicate registration also requires O(n) time in the worst case.
+
+### 7. Evidence-Based Recommendation
+
+The program successfully compiles and passes the recorded test cases. The manual fee calculation confirms that the final collection is Rs. 130. The implementation demonstrates encapsulation, inheritance, polymorphism, and abstraction.
+
+For a small parking facility with fixed capacity, an array is a reasonable choice because it is simple and easy to manage. For a larger facility, a HashMap keyed by registration number is recommended for faster average ticket lookup. A separate slot structure can still be used to manage parking capacity.
+
+### 8. Conclusion
+
+The Smart Parking System implements vehicle entry and exit, slot management, ticket handling, and fee calculation. Testing confirms the expected results for the recorded normal, boundary, and invalid scenarios. The design demonstrates key object-oriented principles, while the complexity analysis identifies HashMap as a more suitable option for faster vehicle lookup in a larger system.
