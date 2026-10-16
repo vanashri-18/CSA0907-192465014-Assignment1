@@ -1,0 +1,19 @@
+TASK 7 – OVERRIDE AND SPECIALISE BEHAVIOUR
+
+1. Method Overriding:
+Car, Motorcycle and ElectricCar override calculateFee() because each vehicle type has a different hourly parking rate. Runtime polymorphism calls the appropriate subclass method.
+
+2. @Override Rules:
+The @Override annotation checks that a method correctly overrides an inherited method. The method must have a compatible signature and return type, and it cannot reduce the parent's access level.
+
+3. Use of final:
+The registrationNumber field is final because a vehicle's registration number should not change after construction. The getter is final to prevent subclasses from changing its behaviour. Vehicle is not final because it must have subclasses.
+
+4. Object Methods:
+toString() returns readable vehicle details. equals() compares registration numbers without case sensitivity. hashCode() uses the same registration number so equal vehicles have the same hash code.
+
+5. Switch Alternative:
+A single calculateFee() method could use a switch statement based on a vehicle-type field. This avoids separate fee overrides, but the central method must be updated when a new vehicle type is introduced. With overriding, a new type can implement its own fee method in a new subclass.
+
+6. Complexity Analysis:
+With k vehicle types, a switch-based fee calculation may inspect up to k cases, giving O(k) time in the worst case. Overridden fee calculation is O(1) when each subclass uses a fixed-rate formula. Adding a type to a switch design generally requires changing the central calculation method and possibly the type definition. With overriding, the new subclass can be added without changing existing fee methods.
