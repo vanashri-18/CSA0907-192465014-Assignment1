@@ -1,0 +1,19 @@
+TASK 2 – PARKING SLOT ALLOCATION USING ARRAYS
+
+1. Data Structure:
+A two-dimensional String array stores vehicle registration numbers floor by floor. A null value represents an empty parking slot.
+
+2. Allocation:
+The allocate() method searches each floor and slot. It places the vehicle in the first available slot and returns the floor and slot indexes. If all slots are full, it returns null.
+
+3. Release:
+The release() method validates the floor and slot indexes. If the slot contains a vehicle, it frees the slot and returns true. Invalid or already empty slots return false.
+
+4. Time Complexity:
+Allocation takes O(F × S) time in the worst case, where F is the number of floors and S is the maximum number of slots per floor. Releasing a slot takes O(1) time.
+
+5. Space Complexity:
+The parking array requires O(F × S) space.
+
+6. Alternative Approach:
+Maintaining a stack of free slots can make allocation and release faster, typically O(1) per operation when the free-slot stack is properly maintained. However, it requires additional storage and careful tracking of floor and slot indexes.
