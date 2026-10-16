@@ -1,0 +1,66 @@
+TASK 1 – CAMPUS SMART-PARKING SYSTEM
+
+1. Input and Output
+
+Input: Vehicle registration number, vehicle type, parking slot availability, and parking pass details.
+
+Output: Parking slot allocation, parking ticket, parking fee, and parking availability status.
+
+2. Candidate Classes
+
+- Vehicle
+- ParkingSlot
+- Ticket
+- ParkingPass
+
+3. Class Responsibilities
+
+- Vehicle: Stores vehicle registration number and vehicle type.
+- ParkingSlot: Stores slot number and availability status.
+- Ticket: Stores ticket number and vehicle entry time.
+- ParkingPass: Stores pass details and validity.
+
+4. Methods
+
+- parkVehicle() – Parks a vehicle in an available slot.
+- issueTicket() – Generates a parking ticket.
+- calculateFee() – Calculates the parking fee.
+- releaseSlot() – Releases a parking slot when a vehicle leaves.
+
+5. Business Rules
+
+- Students and staff with a valid monthly parking pass can park for free.
+- Visitors without a valid pass must pay the parking fee.
+- A vehicle can occupy only one parking slot at a time.
+- A vehicle can be parked only when a slot is available.
+
+6. Assumptions
+
+- Every vehicle has a unique registration number.
+- Each parking slot has a unique slot number.
+- Parking slot availability is updated when a vehicle enters or leaves.
+- Parking fees are calculated according to the parking rules.
+
+7. Vehicle Objects vs Parallel Arrays
+
+Vehicle Objects:
+A Vehicle object stores related details, such as registration number and vehicle type, together in one object. This makes the program easier to understand, manage, and maintain.
+
+Parallel Arrays:
+Parallel arrays store vehicle registration numbers and vehicle types in separate arrays. The same index must be used to access details belonging to the same vehicle. This can become difficult to maintain when the data grows.
+
+8. Searching and Adding Attributes
+
+Searching:
+The system can search for a vehicle using its registration number. It checks the stored vehicle records and returns the matching vehicle if found.
+
+Adding an Attribute:
+If a new attribute, such as owner name, is needed, a Vehicle class can be updated by adding a new field. With parallel arrays, an additional array must be maintained, which increases complexity.
+
+9. Time and Space Complexity
+
+Searching:
+A linear search takes O(n) time in the worst case because it may check every vehicle record.
+
+Space:
+Storing n vehicle records requires O(n) space. Using objects keeps related vehicle information together and makes the design easier to maintain.
