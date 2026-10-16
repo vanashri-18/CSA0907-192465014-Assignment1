@@ -1,0 +1,45 @@
+# TASK 12 – RE-EVALUATE AND ADAPT THE DESIGN
+
+## A. Impact Analysis – 2 Marks
+
+The original Smart Parking System supported a smaller parking facility with three floors and existing vehicle categories. The new requirements introduce e-bikes, delivery vans, one-day passes, and five floors with different numbers of parking slots.
+
+The `Vehicle` class and its subclasses are affected because the system must represent the new vehicle categories. The `ParkingFacility` class requires changes to support new pricing rules, pass management, and the extended floor layout. The `ParkingTicket` class continues to store vehicle information for each occupied slot.
+
+The original uniform array design is unsuitable because each floor now has a different capacity. A jagged array (`ParkingTicket[][]`) is used, where each inner array represents one floor and can have a different length. The revised design supports five floors containing 3, 4, 2, 5, and 3 slots respectively.
+
+## B. Evaluation of the Original Design – 2 Marks
+
+The original object-oriented design provides a useful starting point, but it requires modification to support the changed requirements. New subclasses such as `EBike` and `DeliveryVan` represent the new vehicle types. However, adding subclasses alone is insufficient because parking fees, pass management, and floor allocation also require changes.
+
+The current implementation keeps the pricing rules in the `calculateFee()` method inside `ParkingFacility`. This centralizes the rules but means that the method must be modified when new pricing policies are introduced. The existing `Vehicle` abstraction and `ParkingTicket` class can remain unchanged, while `ParkingFacility` requires modification.
+
+Therefore, retaining the original design without changes would not satisfy the new requirements. A modified design is more appropriate.
+
+## C. Adaptation or Redesign – 2 Marks
+
+The selected approach is to modify the original design rather than completely redesign the system.
+
+The revised class structure contains:
+
+- `Vehicle`: Abstract parent class for vehicle registration and type information.
+- `Car`, `Bike`, `Truck`, `EBike`, and `DeliveryVan`: Vehicle subclasses.
+- `ParkingTicket`: Stores the vehicle occupying a parking slot.
+- `ParkingFacility`: Manages parking, vehicle exits, pricing, pass purchases, floor capacities, and collection.
+- `Pass`: Interface defining the pass price.
+- `OneDayPass`: Implements the one-day pass with a fixed price of Rs.100.
+- `SmartParkingSystemV2`: Runs the program and demonstrates the test cases.
+
+A jagged array represents the five floors with different slot capacities. E-bikes are charged a flat fee of Rs.25 per stay. Delivery vans are charged at Rs.60 per started hour when they exit between 9 AM and 5 PM, and Rs.30 per started hour otherwise. This implementation uses the exit time to determine the delivery van rate. A visitor who purchases a one-day pass pays Rs.100 for the pass and no additional parking fee when exiting during the implemented pass usage.
+
+The revised system was implemented in `SmartParkingSystemV2.java` and successfully compiled and executed.
+
+## D. Evidence-Based Defence – 2 Marks
+
+The modified design meets the new requirements while preserving reusable parts of the original implementation. The `Vehicle` abstraction and `ParkingTicket` class remain unchanged. The `ParkingFacility` class requires modification to support the new pricing policies, pass management, and five-floor layout.
+
+The program was tested with a car, an e-bike, a delivery van, and a one-day pass. The e-bike parking fee was Rs.25, the delivery van fee during the specified time window was Rs.60 for 60 minutes, and the pass holder's additional exit fee was Rs.0. The pass purchase added Rs.100 to the collection, resulting in a total collection of Rs.185. The output also confirmed that all five floors have their specified capacities.
+
+The main advantage of this approach is that the original design is reused and extended without a complete rewrite. However, the pricing logic is still centralized in conditional statements, so adding many more vehicle types could make the method harder to maintain. A future improvement would introduce a `PricingRule` interface or separate pricing classes. This would allow new pricing policies to be added with fewer changes to existing classes.
+
+**Final Decision:** The original design is modified because the new requirements affect vehicle categories, pricing, pass management, and floor allocation. The revised design satisfies the current requirements while retaining useful object-oriented components and allowing future improvements.
