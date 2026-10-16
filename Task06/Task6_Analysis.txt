@@ -1,0 +1,24 @@
+TASK 6 – DESIGN THE INHERITANCE HIERARCHY
+
+1. Superclass and Subclasses:
+Vehicle is the superclass. Car and Motorcycle extend Vehicle, while ElectricCar extends Car. This uses hierarchical and multilevel inheritance.
+
+2. Inherited and Added Features:
+Vehicle contains vehicleNumber, parkingRate, calculateFee() and display(). Car inherits these features and adds model. ElectricCar inherits Vehicle and Car features and adds batteryCapacity. Motorcycle inherits Vehicle features.
+
+3. Use of super:
+super(vehicleNumber, parkingRate) calls the Vehicle constructor. The Car constructor calls super() to initialize Vehicle data. ElectricCar calls the Car constructor using super(). super.display() calls the parent class display method.
+
+4. Constructor Execution Order:
+When an ElectricCar object is created, the constructors execute in this order:
+Vehicle → Car → ElectricCar.
+The parent constructor runs before the child constructor.
+
+5. UML Class Diagram:
+Task6_UML.png shows Vehicle as the superclass, Car and Motorcycle as subclasses, and ElectricCar as a subclass of Car. The arrows represent inheritance relationships.
+
+6. Composition Alternative:
+Instead of inheritance, a Vehicle class can contain a VehicleType object that stores the parking rate. Adding a new vehicle type using composition may require only a new type configuration, while inheritance may require creating a new subclass. Composition is useful when vehicle types change frequently.
+
+7. Complexity Analysis:
+Calculating the fee using a fixed rate takes O(1) time in both designs. Each vehicle requires O(1) space. Composition also stores a reference to a VehicleType object. For n vehicles, total vehicle storage is O(n), excluding shared type data.
