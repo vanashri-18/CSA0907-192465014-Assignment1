@@ -1,0 +1,16 @@
+TASK 3 - PARKING SLOT ALLOCATION
+
+1. Allocation:
+The allocate() method searches each floor and slot. It stores the vehicle number in the first free slot and returns the floor and slot indexes. If all slots are full, it returns null.
+
+2. Release:
+The release() method validates the floor and slot indexes. It frees an occupied slot and returns true. Invalid or already free slots return false.
+
+3. Time Complexity:
+Allocation takes O(F x S) in the worst case, where F is the number of floors and S is the maximum number of slots per floor. Release takes O(1).
+
+4. Space Complexity:
+The two-dimensional array requires O(F x S) space.
+
+5. Alternative Approach:
+A stack of free slot positions can make allocation and release faster, typically O(1), with additional memory to track free slots.
