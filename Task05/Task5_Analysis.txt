@@ -1,0 +1,15 @@
+TASK 5 – STATIC MEMBERS AND OBJECT LIFE CYCLE
+
+1. **Static Variables:** The ticket counter is static because all ParkingTicket objects share the same counter. This avoids duplicate ticket numbers across facilities. The example also uses static total occupancy to demonstrate shared data.
+
+2. **Static Method and Static Block:** The getTotalOccupancy() method accesses shared class-level data. The static block runs once when the ParkingTicket class is initialized.
+
+3. **Object Life Cycle:** When a vehicle leaves, its ticket may no longer be required. When no reachable references point to the ticket, it becomes eligible for garbage collection. Setting a reference to null does not immediately destroy the object.
+
+4. **Passing and Returning Objects:** The parkVehicle() method creates and returns a ParkingTicket object. The vehicleLeaves() method receives a ticket reference as a parameter.
+
+5. **Multiple Facilities:** A static ticket counter provides sequential ticket numbers across North and South Gates in the same application. Separate instance counters could generate duplicate numbers.
+
+6. **Space Complexity:** For n tickets, the shared static counter uses O(1) space. For k facility objects, separate instance counters use O(k) space, while one static counter uses O(1) space. Reachable ticket objects require O(n) space.
+
+7. **Design Limitation:** In a real parking system, each facility should maintain its own occupancy count. Ticket IDs can use a shared counter. The system should also prevent the same ticket from being used to exit twice.
